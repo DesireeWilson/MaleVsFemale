@@ -1,0 +1,10 @@
+#!/bin/bash
+
+source ".pathDirFile";
+#source ".sampleDirFile";
+
+for sample in `(cat $samples)`; do
+  #echo $sample
+  thefile=$dataDir/$sample
+  $appDir/fastqc $thefile/* --outdir=$projectDir/$outputDir
+done
