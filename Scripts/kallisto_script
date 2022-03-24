@@ -1,0 +1,9 @@
+#!/bin/bash
+
+source ".pathDirFile";
+for sample in `(cat $samples)`; do
+  cd $dataDir/$sample
+  forward_read=$(ls | grep R1)
+  reverse_read=$(ls | grep R2)
+  kallisto quant -i $kallistoIndexDir -o $kallistoOutputDir -b 100 $forward_read $reverse_read  
+done
