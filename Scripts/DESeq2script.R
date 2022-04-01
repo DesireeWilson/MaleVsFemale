@@ -1,7 +1,8 @@
-library(tximport)
-library(rhdf5)
-library(DESeq2)
 source("dirForDEanalysis.R")
+library(tximport, lib.loc = rLibPackageDir)
+library(rhdf5, lib.loc = rLibPackageDir)
+library(DESeq2, lib.loc = rLibPackageDir)
+
 
 
 #read in full sample names:
