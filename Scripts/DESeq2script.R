@@ -24,10 +24,11 @@ dds <- DESeqDataSetFromTximport(txi.tx, pheno, ~sex)
 
 #writing raw counts to file:
 date <- format(Sys.time(), format = "%Y-%m-%d_%H_%M_%S")
+dir.create(file.path(DESeqOutputDir,date))
 rawCountsOutputDir <- file.path(DESeqOutputDir, date, "RawCounts")
 dir.create(rawCountsOutputDir)
 
-rawCountsOutputFile <- filepath(rawCountsOutputDir, "DESeq-MaleVsFemale_rawCountsMatrix.txt")
+rawCountsOutputFile <- file.path(rawCountsOutputDir, "DESeq-MaleVsFemale_rawCountsMatrix.txt")
 write.csv(dds, rawCountsOutputFile) 
 
 #filtering
