@@ -28,8 +28,8 @@ dir.create(file.path(DESeqOutputDir,date))
 rawCountsOutputDir <- file.path(DESeqOutputDir, date, "RawCounts")
 dir.create(rawCountsOutputDir)
 
-rawCountsOutputFile <- file.path(rawCountsOutputDir, "DESeq-MaleVsFemale_rawCountsMatrix.txt")
-write.csv(dds, rawCountsOutputFile) 
+rawCountsOutputFile <- file.path(rawCountsOutputDir, "DESeq-MaleVsFemale_rawCountsMatrix_NOTnormalized.txt")
+write.csv(counts(dds), rawCountsOutputFile) 
 
 #filtering
 keep <- rowSums(counts(dds)) >= 10
