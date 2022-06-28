@@ -22,6 +22,14 @@ txi.tx <- tximport(files, type = "kallisto", txOut = TRUE)
 #creating the DESeq object for analysis
 dds <- DESeqDataSetFromTximport(txi.tx, pheno, ~sex)
 
+#writing raw counts to file:
+date <- format(Sys.time(), format = "%Y-%m-%d_%H_%M_%S")
+rawCountsOutputDir <- file.path(DESeqOutputDir, date, "RawCounts")
+dir.create(rawCountsOutputDir)
+
+rawCountsOutputFile <- filepath(rawCountsOutputDir, "DESeq-MaleVsFemale_rawCountsMatrix.txt")
+write.csv(dds, rawCountsOutputFile) 
+
 #filtering
 keep <- rowSums(counts(dds)) >= 10
 dds <- dds[keep,]
@@ -34,7 +42,6 @@ res <- results(dds)
 resOrdered <- res[order(res$pvalue),]
 
 #writing the results to file
-date <-format(Sys.time(), format = "%Y-%m-%d_%H_%M_%S")
 outputDir <- file.path(DESeqOutputDir, date)
 dir.create(outputDir)
 outputFile <- file.path(outputDir, "DESeq2-MaleVsFemale.txt")
